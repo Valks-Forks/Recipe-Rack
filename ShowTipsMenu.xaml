@@ -1,0 +1,58 @@
+﻿<Window x:Class="Recipe_Rack.ShowTipsMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Recipe_Rack"
+        mc:Ignorable="d"
+        Title="ShowTipsMenu" Height="807" Width="1209" Icon="Cook-Book-icon (16x16).png" Initialized="Window_Initialized" ResizeMode="NoResize" BorderThickness="0,1,0,0" Closing="Window_Closing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45*"/>
+            <RowDefinition Height="343*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="749" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Grid.RowSpan="2">
+            <RichTextBox x:Name="Tips_Rich_TextBox" HorizontalAlignment="Left" Height="684" VerticalAlignment="Top" Width="1154" Margin="9,54,0,0" IsDocumentEnabled="True" IsEnabled="False" TextChanged="Tips_Rich_TextBox_TextChanged">
+                <FlowDocument>
+                    <Paragraph/>
+                </FlowDocument>
+            </RichTextBox>
+        </Border>
+        <CheckBox x:Name="EnableSpellCheck_CheckBox" Content="Spell Check" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Checked="EnableSpellCheck_CheckBox_Checked" Unchecked="EnableSpellCheck_CheckBox_Unchecked"/>
+        <GroupBox Header="Editor Panel" HorizontalAlignment="Left" Height="45" Margin="20,13,0,0" VerticalAlignment="Top" Width="1155" FontSize="10">
+            <ComboBox x:Name="FontSize_ComboBox" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Width="41" SelectionChanged="FontSize_ComboBox_SelectionChanged" DropDownClosed="FontSize_ComboBox_DropDownClosed">
+                <ComboBoxItem Content="8" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="10" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="12" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="14" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="16" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="18" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="20" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="22" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="26" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="30" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="34" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="38" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="42" HorizontalAlignment="Left" Width="78"/>
+                <ComboBoxItem Content="46" HorizontalAlignment="Left" Width="78"/>
+            </ComboBox>
+        </GroupBox>
+        <CheckBox x:Name="EditMode_CheckBox" Content="Edit Mode" HorizontalAlignment="Left" Margin="130,30,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="EditMode_CheckBox_Unchecked"/>
+        <Label Content="Font Size:" HorizontalAlignment="Left" Margin="270,24,0,0" VerticalAlignment="Top" Width="60"/>
+
+        <Button x:Name="Undo_Button" Margin="225,30,936,39" ToolTip="Undo" BorderThickness="0" Click="Undo_Button_Click">
+            <StackPanel Height="22" Width="25">
+                <Image Source="C:\Users\Vlemi\source\repos\Recipe Rack\Resources\Undo-icon.png" Height="18" Width="25" />
+
+            </StackPanel>
+        </Button>
+        <Button x:Name="Save_Button" Content="Save" HorizontalAlignment="Left" Margin="980,30,0,0" VerticalAlignment="Top" Width="75" Click="Save_Button_Click"/>
+        <Button x:Name="Save_Close_Button" Content="Save &amp; Close" HorizontalAlignment="Left" Margin="1075,30,0,0" VerticalAlignment="Top" Width="85" Click="Save_Close_Button_Click"/>
+
+
+
+
+
+
+    </Grid>
+</Window>

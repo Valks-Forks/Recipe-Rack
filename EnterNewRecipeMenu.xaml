@@ -1,0 +1,72 @@
+﻿<Window x:Class="Recipe_Rack.EnterNewRecipeMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Recipe_Rack"
+        mc:Ignorable="d"
+        Title="Enter A New Recipe" Height="447" Width="554" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" BorderThickness="1" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="Gainsboro" Icon="Cook-Book-icon (16x16).png">
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="1" ShadowDepth="1"/>
+    </Window.Effect>
+    <Grid Margin="0,0,-8,0">
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Center" Height="400" Margin="10,5,19,11" VerticalAlignment="Center" Width="525"/>
+        <TextBox x:Name="RecipeName_TextBox" HorizontalAlignment="Left" Height="19" Margin="25,106,0,0" VerticalAlignment="Top" Width="210" SpellCheck.IsEnabled="True" MaxLines="1" IsUndoEnabled="False" AutoWordSelection="True" MaxLength="35" TextChanged="CheckForButtonUpdate" UndoLimit="0" ToolTip="Make sure your Recipe Name does not contain special characters." KeyUp="RecipeName_TextBox_KeyUp"/>
+        <ListView x:Name="EnterNewRecipe_IngredientListView" HorizontalAlignment="Left" Height="200" Margin="25,145,0,0" VerticalAlignment="Top" Width="210" IsTextSearchEnabled="False" ToolTip="Add an ingredient here." SelectionMode="Single" ScrollViewer.HorizontalScrollBarVisibility="Visible" SizeChanged="EnterNewRecipe_IngredientListView_SizeChanged">
+            <ListView.Resources>
+                <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Left"  />
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+
+                <GridView>
+                    <GridViewColumn Width="210" Header="   Ingredients List" />
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox x:Name="IngredList_TextBox" HorizontalAlignment="Left" Height="23" Margin="25,345,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210" MaxLength="70" ScrollViewer.CanContentScroll="True" KeyDown="IngredList_TextBox_KeyDown"/>
+        <Button Content="X" HorizontalAlignment="Left" Margin="215,145,0,0" VerticalAlignment="Top" Width="20" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" ToolTip="Removes current selected ingredient." Background="White" FontSize="11" Height="22" Foreground="Red" Click="Button_Click"/>
+        <Label Content="Recipe Category:" HorizontalAlignment="Left" Margin="25,30,0,0" VerticalAlignment="Top" Height="19" Width="100" Padding="0" ScrollViewer.CanContentScroll="True"/>
+        <RichTextBox x:Name="Directions_RichTextBox" HorizontalAlignment="Left" Height="272" Margin="315,78,0,0" VerticalAlignment="Top" Width="200" UndoLimit="0" IsUndoEnabled="False" TextChanged="Directions_RichTextBox_TextChanged" ScrollViewer.CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+            <FlowDocument IsEnabled="False" PagePadding="2,0">
+                <Paragraph>
+                    <Run Text="1:"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="2:"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="3:"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="4:"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="5:"/>
+                </Paragraph>
+                <Paragraph>
+                    <Run Text="6:"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <GridSplitter HorizontalAlignment="Left" Height="396" Margin="270,5,0,0" VerticalAlignment="Top" Width="2" Background="#FFC5C5C5" IsEnabled="False"/>
+        <ComboBox x:Name="RecipeDifficulty_ComboBox" HorizontalAlignment="Left" Margin="413,27,0,0" VerticalAlignment="Top" Width="35" ToolTip="Less than 30 minutes would be a 1. Greater than 2 hours with many ingredients would be a 5." SelectionChanged="RecipeDifficulty_ComboBox_SelectionChanged">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2"/>
+            <ComboBoxItem Content="3"/>
+            <ComboBoxItem Content="4"/>
+            <ComboBoxItem Content="5"/>
+        </ComboBox>
+        <Label Content="Recipe Difficulty:" HorizontalAlignment="Left" Margin="315,25,0,0" VerticalAlignment="Top"/>
+        <Label Content="Directions:" HorizontalAlignment="Left" Margin="315,58,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="Spell_CheckBox" Content="Spellcheck" HorizontalAlignment="Left" Margin="439,63,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="Spell_CheckBox_Unchecked"/>
+        <Label Content="Recipe Name:" Margin="25,89,686,310" Padding="0"/>
+        <Button x:Name="FinalizeRecipe_Button" Content="Finalize Recipe" HorizontalAlignment="Left" Margin="430,360,0,0" VerticalAlignment="Top" Width="85" IsEnabled="False" ToolTip="Make sure Recipe Menu is filled out before continuing." Click="FinalizeRecipe_Button_Click"/>
+        <Label Content="Recipe Name:" HorizontalAlignment="Left" Margin="30,88,0,0" VerticalAlignment="Top" Width="85" Padding="0"/>
+        <ComboBox x:Name="RecipeCategory_ComboBox" HorizontalAlignment="Left" Margin="25,49,0,0" VerticalAlignment="Top" Width="135" Initialized="RecipeCategory_ComboBox_Initialized"/>
+        <CheckBox x:Name="IsFavorite_Checkbox" Content="Favorite" HorizontalAlignment="Left" Margin="173,51,0,0" VerticalAlignment="Top" ToolTip="Check this to set the recipe as a Favorite recipe."/>
+
+    </Grid>
+</Window>
