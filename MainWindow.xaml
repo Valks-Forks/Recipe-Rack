@@ -75,10 +75,10 @@
         </Border>
         <Button x:Name="add_New_Recipe" Content="Add New Recipe" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" Click="add_New_Recipe_Click" ToolTip="This allows you to add new recipes."/>
         <Button x:Name="ShowTips_Button" Content="Show Tips" HorizontalAlignment="Left" Margin="25,12,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1" Height="23" Padding="0" Click="ShowTips_Button_Click" ToolTip="This takes you to your custom tips section. Add general cooking tips you want to save here."/>
-        <GroupBox Header="Select Recipes" HorizontalAlignment="Left" Height="760" Margin="25,80,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1" BorderBrush="Black">
+        <GroupBox x:Name="SelectRecipeName_Groupbox" Header="Select Recipes" HorizontalAlignment="Left" Height="760" Margin="25,80,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1" BorderBrush="Black">
             <ListBox x:Name="SelectRecipes_ListBox" HorizontalAlignment="Left" Height="725" VerticalAlignment="Top" Width="190" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="-1,10,-2,0" FontSize="16" SelectionChanged="SelectRecipes_ListBox_SelectionChanged" ToolTip="Recipes you have saved will appear here. Select one to show it."/>
         </GroupBox>
-        <GroupBox Header="" HorizontalAlignment="Left" Height="762" Margin="230,88,0,0" VerticalAlignment="Top" Width="510" Grid.Column="1" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
+        <GroupBox x:Name="RecipeCardOutline_Groupbox2" Header="" HorizontalAlignment="Left" Height="762" Margin="230,88,0,0" VerticalAlignment="Top" Width="510" Grid.Column="1" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
             <GroupBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -88,21 +88,21 @@
                 </TransformGroup>
             </GroupBox.RenderTransform>
         </GroupBox>
-        <GroupBox Header="" HorizontalAlignment="Left" Height="762" Margin="230,80,0,0" VerticalAlignment="Top" Width="510" Grid.Column="1" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
-            <GroupBox Header="Difficulty" HorizontalAlignment="Left" Height="50" Margin="384,24,0,0" VerticalAlignment="Top" Width="81" FontSize="16" Background="#FFF0F0F0" BorderBrush="Black" ToolTip="How time consuming and complex this recipe is.">
+        <GroupBox x:Name="RecipeCardOutline_Groupbox1" Header="" HorizontalAlignment="Left" Height="762" Margin="230,80,0,0" VerticalAlignment="Top" Width="510" Grid.Column="1" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
+            <GroupBox x:Name="RecipeCardDifficulty_Groupbox" Header="Difficulty" HorizontalAlignment="Left" Height="50" Margin="384,24,0,0" VerticalAlignment="Top" Width="81" FontSize="16" Background="#FFF0F0F0" BorderBrush="Black" ToolTip="How time consuming and complex this recipe is.">
                 <Label x:Name="Card_RecipeDifficulty_Label" Content="" HorizontalAlignment="Left" Margin="29,0,0,0" VerticalAlignment="Top" FontSize="14" Padding="0" FontWeight="Bold" Width="13" RenderTransformOrigin="0.692,0.421" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             </GroupBox>
         </GroupBox>
-        <Label Content="Recipe Card" HorizontalAlignment="Left" Margin="430,68,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-        <GroupBox Header="Recipe Category" HorizontalAlignment="Left" Height="70" Margin="253,115,0,0" VerticalAlignment="Top" Width="320" Grid.Column="1" BorderBrush="Black" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" IsEnabled="False"/>
+        <Label x:Name="RecipeCard_Label" Content="Recipe Card" HorizontalAlignment="Left" Margin="430,68,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+        <GroupBox x:Name="RecipeCardCategory_Groupbox" Header="Recipe Category" HorizontalAlignment="Left" Height="70" Margin="253,115,0,0" VerticalAlignment="Top" Width="320" Grid.Column="1" BorderBrush="Black" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" IsEnabled="False"/>
         <Label x:Name="Card_RecipeCategory_Label" Content="" HorizontalAlignment="Left" Margin="260,145,0,0" VerticalAlignment="Top" Width="306" FontSize="18" Height="40" Grid.Column="1" BorderThickness="0" HorizontalContentAlignment="Center"/>
-        <GroupBox Header="Recipe Name" HorizontalAlignment="Left" Height="70" Margin="250,240,0,0" VerticalAlignment="Top" Width="455" Grid.Column="1" BorderBrush="Black" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+        <GroupBox x:Name="RecipeCardName_Groupbox" Header="Recipe Name" HorizontalAlignment="Left" Height="70" Margin="250,240,0,0" VerticalAlignment="Top" Width="455" Grid.Column="1" BorderBrush="Black" FontSize="14" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
         <Label x:Name="Card_RecipeName_Label" Content="" HorizontalAlignment="Left" Margin="260,270,0,0" VerticalAlignment="Top" Width="445" FontSize="18" Height="40" Grid.Column="1" BorderThickness="0" HorizontalContentAlignment="Center"/>
-        <GroupBox Header="Ingredients List" HorizontalAlignment="Left" Height="445" Margin="253,335,0,0" VerticalAlignment="Top" Width="212" Grid.Column="1" BorderBrush="Black" FontSize="16">
+        <GroupBox x:Name="RecipeCardIngredientsList_Groupbox" Header="Ingredients List" HorizontalAlignment="Left" Height="445" Margin="253,335,0,0" VerticalAlignment="Top" Width="212" Grid.Column="1" BorderBrush="Black" FontSize="16">
             <ListBox x:Name="Card_RecipeIngredients_ListBox" HorizontalAlignment="Left" Height="405" Margin="-1,10,-2,0" VerticalAlignment="Top" Width="202" IsTextSearchEnabled="False" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Padding="0,0,-4,0"/>
         </GroupBox>
-        <GroupBox Header="Directions" HorizontalAlignment="Left" Height="445" Margin="480,335,0,0" VerticalAlignment="Top" Width="225" Grid.Column="1" BorderBrush="Black" FontSize="16">
-            <RichTextBox x:Name="Card_RecipeBody_RichTextBox" HorizontalAlignment="Left" Height="405" VerticalAlignment="Top" Width="215" Margin="-1,10,-2,0" IsReadOnly="True" Padding="0">
+        <GroupBox x:Name="RecipeCardDirections_Groupbox" Header="Directions" HorizontalAlignment="Left" Height="445" Margin="480,335,0,0" VerticalAlignment="Top" Width="225" Grid.Column="1" BorderBrush="Black" FontSize="16">
+            <RichTextBox x:Name="Card_RecipeBody_RichTextBox" HorizontalAlignment="Left" Height="405" VerticalAlignment="Top" Width="215" Margin="-1,10,-2,0" IsReadOnly="True" Padding="0" ScrollViewer.CanContentScroll="True" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                 <FlowDocument>
                     <Paragraph>
                         <Run Text=""/>
@@ -110,9 +110,10 @@
                 </FlowDocument>
             </RichTextBox>
         </GroupBox>
-        <Button Content="Edit Recipe" HorizontalAlignment="Left" Margin="279,795,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1" ToolTip="Edit this recipe." Click="EditRecipe_Button_Click"/>
-        <Button Content="Delete Recipe" HorizontalAlignment="Left" Margin="595,793,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" ToolTip="Delete this recipe." Background="White" Height="22" Foreground="Red" Grid.Column="1" Click="Delete_Button_Click"/>
-        <Image x:Name="Card_IsFavoriteStar_Image" HorizontalAlignment="Left" Height="30" Margin="673,252,0,0" VerticalAlignment="Top" Width="30" Grid.Column="1" Source="Star Gold.png" IsEnabled="False" Visibility="Hidden"/>
+        <Button x:Name="EditRecipe_Button" Content="Edit Recipe" HorizontalAlignment="Left" Margin="279,795,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1" ToolTip="Edit this recipe." Click="EditRecipe_Button_Click" IsEnabled="False"/>
+        <Button x:Name="DeleteRecipe_Button" Content="Delete Recipe" HorizontalAlignment="Left" Margin="595,793,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" ToolTip="Delete this recipe." Background="White" Height="22" Foreground="Red" Grid.Column="1" Click="Delete_Button_Click" IsEnabled="False"/>
+        <Image x:Name="Card_IsFavoriteStar_Image" HorizontalAlignment="Left" Height="30" Margin="673,252,0,0" VerticalAlignment="Top" Width="30" Grid.Column="1" Source="Star Gold.png" ToolTip="This recipe is a Favorite." Visibility="Hidden"/>
+        <Label x:Name="GetStarted_Label" Content="To get started click &quot;Add New Recipe&quot;!" HorizontalAlignment="Left" Margin="204,42,0,0" VerticalAlignment="Top" Grid.Column="1" Width="315" FontSize="18"/>
 
     </Grid>
 

@@ -25,7 +25,6 @@ namespace Recipe_Rack
         //This adds an item to the ingredient list
         private void IngredList_TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            
             // Add the Ingredient to the list if enter is pressed 
             if (e.Key == Key.Enter && IngredList_TextBox.Text.Length > 3)
             {

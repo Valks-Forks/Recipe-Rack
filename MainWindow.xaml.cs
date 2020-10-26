@@ -66,6 +66,7 @@ namespace Recipe_Rack
                 System.IO.File.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Tips\\TipsDocument.json");
             }
             InitializeComponent();
+            Show_UIControls(false);
         }
 
         /// <summary>
@@ -88,7 +89,6 @@ namespace Recipe_Rack
                 }
                 return StringToConvert;
             }
-
             else
             {
                 return StringToConvert;
@@ -110,7 +110,7 @@ namespace Recipe_Rack
         {
             Button button = sender as Button;
             var recipes = UpdateObjectsFromFiles();
-            SelectRecipes_ListBox.Items.Clear();
+            SelectRecipes_ListBox.Items.Clear(); 
 
             // This section of code just clears the recipe Card Viewer section of old previous data
             Card_IsFavoriteStar_Image.Visibility = Visibility.Hidden;
@@ -141,7 +141,19 @@ namespace Recipe_Rack
                 {
                     SelectRecipes_ListBox.Items.Add(MakeTextReadableForList(item.RecipeName));
                 }
-            } 
+            }
+
+            // Hide the entire ui, then only show user the next thing they should select *Quality of Life*
+            if (SelectRecipes_ListBox.Items.Count >= 1)
+            {
+                Show_UIControls(false);
+                SelectRecipeName_Groupbox.Visibility = Visibility.Visible;
+                SelectRecipeName_Groupbox.IsEnabled = true;           
+            }
+            else
+            {
+                Show_UIControls(false);
+            }
         }
 
         private void SelectRecipes_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -160,6 +172,11 @@ namespace Recipe_Rack
             Card_RecipeName_Label.Content = "";
             Card_RecipeName_Label.IsEnabled = true;
 
+            if (SelectRecipes_ListBox.SelectedIndex >= 0)
+            { 
+                Show_UIControls(true);
+            }
+            
             // This section tells the card viewer what item it should show. *This area is prone to an Out of Index exception if i loops too high* 
             // This can be caused by the listbox not being able to match the correct name with the ones generated in the Recipe list
             int i = 0;
@@ -176,14 +193,12 @@ namespace Recipe_Rack
             }
 
             // If i looped too high throw an exception here so it is easier to track
-
             if (i > recipes.Count)
             {
                 throw new IndexOutOfRangeException("ERROR: Could not match a name from the SelectRecipes_ListBox" +
                     " to a recipe file. This caused the array to loop out of range. Did you alter file names while the application was running?");
             }
             
-
             // This section is responsible for displaying the selected recipe to the user in the Card Viewer section
             if (SelectRecipes_ListBox.Items.Count > 0)
             {
@@ -193,6 +208,7 @@ namespace Recipe_Rack
                 Card_RecipeDifficulty_Label.Content = thisRecipe.Difficulty.ToString();
                 Card_RecipeName_Label.Content = thisRecipe.RecipeName;
 
+                //If this recipe is a favorite recipe show the user a start icon
                 if (thisRecipe.IsFavorite)
                 {
                     Card_IsFavoriteStar_Image.Visibility = Visibility.Visible;
@@ -219,6 +235,7 @@ namespace Recipe_Rack
                 enterEditRecipeMenu.Left = this.Left + 300;
                 enterEditRecipeMenu.IsThisAnEdit = true;
                 enterEditRecipeMenu.OldRecipePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Recipes\\" + Card_RecipeName_Label.Content.ToString().Trim() + ".json";
+                enterEditRecipeMenu.Directions_RichTextBox.Document.Blocks.Clear();
                 enterEditRecipeMenu.Directions_RichTextBox.AppendText((new TextRange(Card_RecipeBody_RichTextBox.Document.ContentStart, Card_RecipeBody_RichTextBox.Document.ContentEnd).Text));
                 enterEditRecipeMenu.RecipeName_TextBox.Text = Card_RecipeName_Label.Content.ToString();
                 enterEditRecipeMenu.RecipeDifficulty_ComboBox.SelectedItem = Card_RecipeDifficulty_Label.Content;
@@ -244,8 +261,12 @@ namespace Recipe_Rack
                 enterEditRecipeMenu.EnterNewRecipe_IngredientListView.Items.RemoveAt(enterEditRecipeMenu.EnterNewRecipe_IngredientListView.Items.Count - 1);
 
                 // This is here so when the dialog box is closed the SelectRecipeNames list doesnt loop out of index *Bug avoidance*
+                // Also force the edit and delete recipe buttons to disable.
                 SelectRecipes_ListBox.Items.Clear();
+                DeleteRecipe_Button.IsEnabled = false;
+                EditRecipe_Button.IsEnabled = false;
                 enterEditRecipeMenu.ShowDialog();
+                Show_UIControls(false);
             }
         }
            
@@ -261,6 +282,7 @@ namespace Recipe_Rack
                 areYouSureDialog.Left = this.Left + 300;
                 areYouSureDialog.ShowDialog();
                 SelectRecipes_ListBox.Items.Clear();
+                Show_UIControls(false);
             }
         }
 
@@ -273,6 +295,83 @@ namespace Recipe_Rack
             showTipsMenu.Top = this.Top + 50;
             showTipsMenu.Left = this.Left + 100;
             showTipsMenu.ShowDialog();
+        }
+        /// <summary>
+        /// This method shows/hides and enables/disables the UI elements for the user. If True UI is shown to user. If False UI is hidden from user.
+        /// </summary>
+        private void Show_UIControls(bool show)
+        {
+            if (show == true)
+            {
+                SelectRecipeName_Groupbox.IsEnabled = true;
+                RecipeCardCategory_Groupbox.IsEnabled = true;
+                RecipeCardDifficulty_Groupbox.IsEnabled = true;
+                RecipeCardDirections_Groupbox.IsEnabled = true;
+                RecipeCardIngredientsList_Groupbox.IsEnabled = true;
+                RecipeCardName_Groupbox.IsEnabled = true;
+                DeleteRecipe_Button.IsEnabled = true;
+                EditRecipe_Button.IsEnabled = true;
+
+                // Show the UI for the User
+                SelectRecipeName_Groupbox.Visibility = Visibility.Visible;
+                RecipeCardCategory_Groupbox.Visibility = Visibility.Visible;
+                RecipeCardDifficulty_Groupbox.Visibility = Visibility.Visible;
+                RecipeCardDirections_Groupbox.Visibility = Visibility.Visible;
+                RecipeCardIngredientsList_Groupbox.Visibility = Visibility.Visible;
+                RecipeCardName_Groupbox.Visibility = Visibility.Visible;
+                RecipeCardOutline_Groupbox1.Visibility = Visibility.Visible;
+                RecipeCardOutline_Groupbox2.Visibility = Visibility.Visible;
+                DeleteRecipe_Button.Visibility = Visibility.Visible;
+                EditRecipe_Button.Visibility = Visibility.Visible;
+                RecipeCard_Label.Visibility = Visibility.Visible;
+
+                //Check if the user has any recipes already if they do then dont show the GetStarted label if they dont display it
+                var recipes = UpdateObjectsFromFiles();
+                if (recipes.Count > 0)
+                {
+                    GetStarted_Label.Visibility = Visibility.Hidden;
+                }
+                else
+                {
+                    GetStarted_Label.Visibility = Visibility.Visible;
+                }
+            }
+            else
+            {
+                SelectRecipeName_Groupbox.IsEnabled = false;
+                RecipeCardCategory_Groupbox.IsEnabled = false;
+                RecipeCardDifficulty_Groupbox.IsEnabled = false;
+                RecipeCardDirections_Groupbox.IsEnabled = false;
+                RecipeCardIngredientsList_Groupbox.IsEnabled = false;
+                RecipeCardName_Groupbox.IsEnabled = false;
+                DeleteRecipe_Button.IsEnabled = false;
+                EditRecipe_Button.IsEnabled = false;
+
+                //Hide the UI for the User
+                SelectRecipeName_Groupbox.Visibility = Visibility.Hidden;
+                RecipeCardCategory_Groupbox.Visibility = Visibility.Hidden;
+                RecipeCardDifficulty_Groupbox.Visibility = Visibility.Hidden;
+                RecipeCardDirections_Groupbox.Visibility = Visibility.Hidden;
+                RecipeCardIngredientsList_Groupbox.Visibility = Visibility.Hidden;
+                RecipeCardName_Groupbox.Visibility = Visibility.Hidden;
+                RecipeCardOutline_Groupbox1.Visibility = Visibility.Hidden;
+                RecipeCardOutline_Groupbox2.Visibility = Visibility.Hidden;
+                DeleteRecipe_Button.Visibility = Visibility.Hidden;
+                EditRecipe_Button.Visibility = Visibility.Hidden;
+                RecipeCard_Label.Visibility = Visibility.Hidden;
+
+                //Check if the user has any recipes already if they do then dont show the GetStarted label if they dont display it
+                var recipes = UpdateObjectsFromFiles();
+                if (recipes.Count == 0)
+                {
+                    GetStarted_Label.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    GetStarted_Label.Visibility = Visibility.Hidden;
+                }
+            }
+            
         }
     }
 }
