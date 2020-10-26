@@ -5,22 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Recipe_Rack"
         mc:Ignorable="d"
-        Title="ShowTipsMenu" Height="807" Width="1209" Icon="Cook-Book-icon (16x16).png" Initialized="Window_Initialized" ResizeMode="NoResize" BorderThickness="0,1,0,0" Closing="Window_Closing">
+        Title="ShowTipsMenu" Height="807" Width="1209" Icon="Cook-Book-icon (16x16).png" Initialized="Window_Initialized" ResizeMode="NoResize" BorderThickness="0,1,0,0" Closing="Window_Closing" Background="#FFD3E6FD">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="45*"/>
             <RowDefinition Height="343*"/>
         </Grid.RowDefinitions>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="749" Margin="10,10,0,0" VerticalAlignment="Top" Width="1174" Grid.RowSpan="2">
-            <RichTextBox x:Name="Tips_Rich_TextBox" HorizontalAlignment="Left" Height="684" VerticalAlignment="Top" Width="1154" Margin="9,54,0,0" IsDocumentEnabled="True" IsEnabled="False" TextChanged="Tips_Rich_TextBox_TextChanged">
+            <RichTextBox x:Name="Tips_Rich_TextBox" HorizontalAlignment="Left" Height="684" VerticalAlignment="Top" Width="1154" Margin="9,54,0,0" IsDocumentEnabled="True" IsEnabled="False" TextChanged="Tips_Rich_TextBox_TextChanged" BorderThickness="2">
                 <FlowDocument>
                     <Paragraph/>
                 </FlowDocument>
             </RichTextBox>
         </Border>
-        <CheckBox x:Name="EnableSpellCheck_CheckBox" Content="Spell Check" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Checked="EnableSpellCheck_CheckBox_Checked" Unchecked="EnableSpellCheck_CheckBox_Unchecked"/>
-        <GroupBox Header="Editor Panel" HorizontalAlignment="Left" Height="45" Margin="20,13,0,0" VerticalAlignment="Top" Width="1155" FontSize="10">
-            <ComboBox x:Name="FontSize_ComboBox" HorizontalAlignment="Left" Margin="320,0,0,0" VerticalAlignment="Top" Width="41" SelectionChanged="FontSize_ComboBox_SelectionChanged" DropDownClosed="FontSize_ComboBox_DropDownClosed">
+        <CheckBox x:Name="EnableSpellCheck_CheckBox" Content="Spell Check" HorizontalAlignment="Left" Margin="30,30,0,0" VerticalAlignment="Top" Checked="EnableSpellCheck_CheckBox_Checked" Unchecked="EnableSpellCheck_CheckBox_Unchecked" ToolTip="Check to enable spellcheck. This can cause text to appear laggy."/>
+        <GroupBox Header="Editor Panel" HorizontalAlignment="Left" Height="45" Margin="20,13,0,0" VerticalAlignment="Top" Width="1155" FontSize="10" BorderBrush="Black">
+            <ComboBox x:Name="FontSize_ComboBox" HorizontalAlignment="Left" Margin="264,2,0,0" VerticalAlignment="Top" Width="41" SelectionChanged="FontSize_ComboBox_SelectionChanged" DropDownClosed="FontSize_ComboBox_DropDownClosed" ToolTip="Select Font Size">
                 <ComboBoxItem Content="8" HorizontalAlignment="Left" Width="78"/>
                 <ComboBoxItem Content="10" HorizontalAlignment="Left" Width="78"/>
                 <ComboBoxItem Content="12" HorizontalAlignment="Left" Width="78"/>
@@ -37,12 +37,12 @@
                 <ComboBoxItem Content="46" HorizontalAlignment="Left" Width="78"/>
             </ComboBox>
         </GroupBox>
-        <CheckBox x:Name="EditMode_CheckBox" Content="Edit Mode" HorizontalAlignment="Left" Margin="130,30,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="EditMode_CheckBox_Unchecked"/>
-        <Label Content="Font Size:" HorizontalAlignment="Left" Margin="270,24,0,0" VerticalAlignment="Top" Width="60"/>
+        <CheckBox x:Name="EditMode_CheckBox" Content="Edit Mode" HorizontalAlignment="Left" Margin="130,30,0,0" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="EditMode_CheckBox_Unchecked" ToolTip="Check to enable editing."/>
+        <Label Content="Font Size:" HorizontalAlignment="Left" Margin="225,24,0,0" VerticalAlignment="Top" Width="60"/>
 
-        <Button x:Name="Undo_Button" Margin="225,30,936,39" ToolTip="Undo" BorderThickness="0" Click="Undo_Button_Click">
-            <StackPanel Height="22" Width="25">
-                <Image Source="C:\Users\Vlemi\source\repos\Recipe Rack\Resources\Undo-icon.png" Height="18" Width="25" />
+        <Button x:Name="Undo_Button" Margin="360,28,808,40" ToolTip="Undo" BorderThickness="1" Click="Undo_Button_Click">
+            <StackPanel Height="21" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Source="C:\Users\Vlemi\source\repos\Recipe Rack\Resources\Undo-icon.png" Height="19" Margin="0,3,0,0" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
             </StackPanel>
         </Button>

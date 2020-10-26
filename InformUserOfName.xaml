@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Recipe_Rack"
         mc:Ignorable="d"
-        Title="Incorrect Recipe Name" Height="231" Width="503" ResizeMode="NoResize" Icon="Cook-Book-icon (16x16).png" Background="#FFE4E4E4">
+        Title="Invalid Recipe Name Dialog" Height="231" Width="503" ResizeMode="NoResize" Icon="Cook-Book-icon (16x16).png" Background="Gainsboro">
     <Grid Margin="0,0,-6,1">
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Margin="10,10,0,26" Width="465" RenderTransformOrigin="0.5,0.5"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="-130,320,0,-69" VerticalAlignment="Top" Width="75"/>

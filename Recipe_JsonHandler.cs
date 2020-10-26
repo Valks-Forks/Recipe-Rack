@@ -1,22 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.IO;
 using Newtonsoft.Json;
-using System.Windows.Controls;
 
 namespace Recipe_Rack
 {
-
-    
     class Recipe_JsonHandler
     {
-
-
         /// <summary>
         /// Writes the given object instance to a Json file.
         /// <para>Object type must have a parameterless constructor.</para>
@@ -27,7 +15,7 @@ namespace Recipe_Rack
         /// <param name="filePath">The file path to write the object instance to.</param>
         /// <param name="objectToWrite">The object instance to write to the file.</param>
         /// <param name="append">If false the file will be overwritten if it already exists. If true the contents will be appended to the file.</param>
-        public static void WriteToJsonFile(string filePath, Recipes objectToWrite, bool append = false) 
+        public static void WriteToJsonFile(string filePath, Recipe objectToWrite, bool append = false) 
         {
             TextWriter writer = null;
             try
@@ -69,8 +57,8 @@ namespace Recipe_Rack
         // --------------------------------------------------------------------------------------------------------------
         // This adds another section for handling the Tips Document 
         // Rather than try to edit established code and break everything, Im just going to add a similiar method just for the tips menu
-        // This was the last part of project
-        // 
+        // I only did this because this was one of the last things to implement.
+        // --------------------------------------------------------------------------------------------------------------
 
         public static void WriteToJsonFile_Tips(string filePath, string RichTextToWrite, bool append = false)
         {

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Recipe_Rack"
         mc:Ignorable="d"
-        Title="AreYouSureDialog" Height="221" Width="513" Background="Gainsboro" ResizeMode="NoResize" Icon="Cook-Book-icon (16x16).png">
+        Title="Are You Sure Dialog" Height="221" Width="513" Background="Gainsboro" ResizeMode="NoResize" Icon="Cook-Book-icon (16x16).png">
     <Grid>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="120" Margin="25,28,37,21" VerticalAlignment="Top" Width="430" SnapsToDevicePixels="True" CornerRadius="10">
             <Button x:Name="AYSD_Cancel_Button" Content="Cancel" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="AYSD_Cancel_Button_Click" Margin="29,91,0,0" Padding="0"/>

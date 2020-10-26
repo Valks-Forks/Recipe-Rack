@@ -46,16 +46,16 @@
                         </RowDefinition.BindingGroup>
                     </RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Content="Beef" HorizontalAlignment="Center" VerticalAlignment="Center" Width="176" Height="59" Margin="2,10" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Chicken &amp; Poultry" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="60" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Pork" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Fish &amp; Seafood" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="60" HorizontalContentAlignment="Center" Grid.Row="3" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Soups &amp; Salads" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="4" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Vegetables" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="5" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Breakfast &amp; Lunch" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="6" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Breads" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="7" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Desserts" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="8" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List"/>
-                <Button Content="Other" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" FontSize="20" Grid.Row="9" Click="Button_Click_Populate_Recipe_Name_List"/>
+                <Button Content="Beef" HorizontalAlignment="Center" VerticalAlignment="Center" Width="176" Height="59" Margin="2,10" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Beef recipes."/>
+                <Button Content="Chicken &amp; Poultry" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="60" HorizontalContentAlignment="Center" Grid.Row="1" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Chicken &amp; Poultry recipes."/>
+                <Button Content="Pork" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="2" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Pork recipes."/>
+                <Button Content="Fish &amp; Seafood" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="60" HorizontalContentAlignment="Center" Grid.Row="3" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Fish &amp; Seafood recipes."/>
+                <Button Content="Soups &amp; Salads" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="4" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Soups &amp; Salads recipes."/>
+                <Button Content="Vegetables" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="5" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Vegetables recipes."/>
+                <Button Content="Breakfast &amp; Lunch" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="6" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Breakfast &amp; Lunch recipes."/>
+                <Button Content="Breads" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="7" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Breads recipes."/>
+                <Button Content="Desserts" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" Grid.Row="8" FontSize="20" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Desserts recipes."/>
+                <Button Content="Other" HorizontalAlignment="Center" Margin="2,10" VerticalAlignment="Center" Width="176" Height="59" HorizontalContentAlignment="Center" FontSize="20" Grid.Row="9" Click="Button_Click_Populate_Recipe_Name_List" ToolTip="Click to show all Other recipes."/>
             </Grid>
         </Border>
         <Label Content="Recipe Categories" Margin="8,46,0,0" Width="182" Height="30" HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" BorderThickness="1"/>
@@ -73,10 +73,10 @@
         <Border x:Name="recipeViewerMenu_Border" BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="25" Margin="22,10,0,0" VerticalAlignment="Top" Width="738">
             <Label x:Name="recipeViewer_Label" Content="Recipe Viewer" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="4,2,4,4"/>
         </Border>
-        <Button x:Name="add_New_Recipe" Content="Add New Recipe" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" Click="add_New_Recipe_Click"/>
-        <Button x:Name="ShowTips_Button" Content="Show Tips" HorizontalAlignment="Left" Margin="25,12,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1" Height="23" Padding="0" Click="ShowTips_Button_Click"/>
+        <Button x:Name="add_New_Recipe" Content="Add New Recipe" HorizontalAlignment="Left" Height="25" Margin="10,10,0,0" VerticalAlignment="Top" Width="180" Click="add_New_Recipe_Click" ToolTip="This allows you to add new recipes."/>
+        <Button x:Name="ShowTips_Button" Content="Show Tips" HorizontalAlignment="Left" Margin="25,12,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1" Height="23" Padding="0" Click="ShowTips_Button_Click" ToolTip="This takes you to your custom tips section. Add general cooking tips you want to save here."/>
         <GroupBox Header="Select Recipes" HorizontalAlignment="Left" Height="760" Margin="25,80,0,0" VerticalAlignment="Top" Width="200" Grid.Column="1" BorderBrush="Black">
-            <ListBox x:Name="SelectRecipes_ListBox" HorizontalAlignment="Left" Height="725" VerticalAlignment="Top" Width="190" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="-1,10,-2,0" FontSize="16" SelectionChanged="SelectRecipes_ListBox_SelectionChanged"/>
+            <ListBox x:Name="SelectRecipes_ListBox" HorizontalAlignment="Left" Height="725" VerticalAlignment="Top" Width="190" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="-1,10,-2,0" FontSize="16" SelectionChanged="SelectRecipes_ListBox_SelectionChanged" ToolTip="Recipes you have saved will appear here. Select one to show it."/>
         </GroupBox>
         <GroupBox Header="" HorizontalAlignment="Left" Height="762" Margin="230,88,0,0" VerticalAlignment="Top" Width="510" Grid.Column="1" BorderBrush="Black" RenderTransformOrigin="0.5,0.5">
             <GroupBox.RenderTransform>
@@ -110,7 +110,7 @@
                 </FlowDocument>
             </RichTextBox>
         </GroupBox>
-        <Button Content="Edit Recipe" HorizontalAlignment="Left" Margin="279,795,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1" ToolTip="Edit this Recipe." Click="EditRecipe_Button_Click"/>
+        <Button Content="Edit Recipe" HorizontalAlignment="Left" Margin="279,795,0,0" VerticalAlignment="Top" Width="70" Grid.Column="1" ToolTip="Edit this recipe." Click="EditRecipe_Button_Click"/>
         <Button Content="Delete Recipe" HorizontalAlignment="Left" Margin="595,793,0,0" VerticalAlignment="Top" Width="85" RenderTransformOrigin="0.5,0.5" FontWeight="Bold" ToolTip="Delete this recipe." Background="White" Height="22" Foreground="Red" Grid.Column="1" Click="Delete_Button_Click"/>
         <Image x:Name="Card_IsFavoriteStar_Image" HorizontalAlignment="Left" Height="30" Margin="673,252,0,0" VerticalAlignment="Top" Width="30" Grid.Column="1" Source="Star Gold.png" IsEnabled="False" Visibility="Hidden"/>
 
