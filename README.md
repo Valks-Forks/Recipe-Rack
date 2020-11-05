@@ -12,7 +12,7 @@ The application generates the following directories.
 
 *This Application is a very simple WPF C# project. It was my first "full featured" project start to finish and could definitely be restructured with better coding practices. I tried to ensure it was as bug free as possible, however the .json files are not error checked and if those are altered outside the program incorrectly it could cause issues with the program.
 
-Preview Screenshots
+(Old) Preview Screenshots
 
 ![Recipe Rack Startup](https://github.com/Rowwbit/Recipe-Rack/edit/master/RR_Main.PNG)
 
