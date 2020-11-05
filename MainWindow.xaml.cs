@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -12,28 +13,6 @@ namespace Recipe_Rack
     /// </summary>
     public partial class MainWindow : Window
     {
-        /// <summary>
-        /// This returns a List(Recipes) from the recipe.json files.
-        /// </summary>
-        public static List<Recipe> UpdateObjectsFromFiles()
-        {
-            // Read files from directories
-            string[] FileNames = System.IO.Directory.GetFiles(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Recipes");
-            string DefaultFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Recipes";
-            List<Recipe> RecipeClass_List = new List<Recipe>();
-
-            // Loop through the files
-            int i = 0;
-            foreach (var item in FileNames)
-            { 
-                FileNames[i] = FileNames[i].Remove(0, DefaultFolderPath.Length + 1);
-                RecipeClass_List.Add((Recipe)Recipe_JsonHandler.ReadFromJsonFile<Recipe>(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Recipes\\" + FileNames[i]));
-                i++;
-            }
-            return RecipeClass_List;
-        }
-
-
         /// <summary>
         /// This method takes the button names from the Recipe Category Grid and turns them into RecipeCategory objects in a list for later reference when user adds recipes.
         /// </summary>
@@ -49,21 +28,11 @@ namespace Recipe_Rack
         
         public MainWindow()
         {
-            //Check if user already has the directories for the Recipe Rack. If they do then dont create any.
+            //Check if user already has the directories and files for the Recipe Rack. If they do then dont create any.
             if (!System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\"))
             {  
                 System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\");
-            }
-
-            if (!System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Recipes"))
-            {
-                System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Recipes");
-            }
-
-            if (!System.IO.Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Tips"))
-            {
-                System.IO.Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Tips");
-                System.IO.File.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Tips\\TipsDocument.json");
+                System.IO.File.Create(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\TipsDocument.json");
             }
             InitializeComponent();
             Show_UIControls(false);
@@ -109,7 +78,7 @@ namespace Recipe_Rack
         private void Button_Click_Populate_Recipe_Name_List(object sender, RoutedEventArgs e)
         {
             Button button = sender as Button;
-            var recipes = UpdateObjectsFromFiles();
+            var recipes = SqliteDataAccess.LoadAllRecipes();
             SelectRecipes_ListBox.Items.Clear(); 
 
             // This section of code just clears the recipe Card Viewer section of old previous data
@@ -159,7 +128,7 @@ namespace Recipe_Rack
         private void SelectRecipes_ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // This section auto clears the card view section of all previous data once the user clicks a different recipe 
-            var recipes = UpdateObjectsFromFiles();
+            var recipes = SqliteDataAccess.LoadAllRecipes();
             Card_IsFavoriteStar_Image.Visibility = Visibility.Hidden;
             Card_RecipeBody_RichTextBox.Document.Blocks.Clear();
             Card_RecipeBody_RichTextBox.IsEnabled = true;
@@ -196,14 +165,14 @@ namespace Recipe_Rack
             if (i > recipes.Count)
             {
                 throw new IndexOutOfRangeException("ERROR: Could not match a name from the SelectRecipes_ListBox" +
-                    " to a recipe file. This caused the array to loop out of range. Did you alter file names while the application was running?");
+                    " to a recipe name in database.");
             }
             
             // This section is responsible for displaying the selected recipe to the user in the Card Viewer section
             if (SelectRecipes_ListBox.Items.Count > 0)
             {
                 Recipe thisRecipe = recipes[i];
-                Card_RecipeBody_RichTextBox.AppendText(thisRecipe.BodyMsg);
+                Card_RecipeBody_RichTextBox.AppendText(thisRecipe.DirectionsMsg);
                 Card_RecipeCategory_Label.Content = thisRecipe.categoryName;
                 Card_RecipeDifficulty_Label.Content = thisRecipe.Difficulty.ToString();
                 Card_RecipeName_Label.Content = thisRecipe.RecipeName;
@@ -234,13 +203,14 @@ namespace Recipe_Rack
                 enterEditRecipeMenu.Top = this.Top + 150;
                 enterEditRecipeMenu.Left = this.Left + 300;
                 enterEditRecipeMenu.IsThisAnEdit = true;
-                enterEditRecipeMenu.OldRecipePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Recipes\\" + Card_RecipeName_Label.Content.ToString().Trim() + ".json";
+                enterEditRecipeMenu.OldRecipeName = Card_RecipeName_Label.Content.ToString().Trim();
                 enterEditRecipeMenu.Directions_RichTextBox.Document.Blocks.Clear();
                 enterEditRecipeMenu.Directions_RichTextBox.AppendText((new TextRange(Card_RecipeBody_RichTextBox.Document.ContentStart, Card_RecipeBody_RichTextBox.Document.ContentEnd).Text));
                 enterEditRecipeMenu.RecipeName_TextBox.Text = Card_RecipeName_Label.Content.ToString();
                 enterEditRecipeMenu.RecipeDifficulty_ComboBox.SelectedItem = Card_RecipeDifficulty_Label.Content;
                 enterEditRecipeMenu.RecipeCategory_ComboBox.SelectedItem = Card_RecipeCategory_Label.Content;
 
+                // Check if the Recipe is already a Favorite. If it is then preCheck the checkbox in the edit menu for the user.
                 if (Card_IsFavoriteStar_Image.Visibility == Visibility.Visible)
                 {
                     enterEditRecipeMenu.IsFavorite_Checkbox.IsChecked = true;
@@ -326,7 +296,7 @@ namespace Recipe_Rack
                 RecipeCard_Label.Visibility = Visibility.Visible;
 
                 //Check if the user has any recipes already if they do then dont show the GetStarted label if they dont display it
-                var recipes = UpdateObjectsFromFiles();
+                var recipes = SqliteDataAccess.LoadAllRecipes();
                 if (recipes.Count > 0)
                 {
                     GetStarted_Label.Visibility = Visibility.Hidden;
@@ -334,7 +304,7 @@ namespace Recipe_Rack
                 else
                 {
                     GetStarted_Label.Visibility = Visibility.Visible;
-                }
+                } 
             }
             else
             {
@@ -361,7 +331,7 @@ namespace Recipe_Rack
                 RecipeCard_Label.Visibility = Visibility.Hidden;
 
                 //Check if the user has any recipes already if they do then dont show the GetStarted label if they dont display it
-                var recipes = UpdateObjectsFromFiles();
+                var recipes = SqliteDataAccess.LoadAllRecipes();
                 if (recipes.Count == 0)
                 {
                     GetStarted_Label.Visibility = Visibility.Visible;
@@ -371,7 +341,6 @@ namespace Recipe_Rack
                     GetStarted_Label.Visibility = Visibility.Hidden;
                 }
             }
-            
         }
     }
 }

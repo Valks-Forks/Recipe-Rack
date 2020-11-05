@@ -5,19 +5,70 @@ namespace Recipe_Rack
 	public class Recipe : RecipeCategory
 	{
 		public string RecipeName;
-		public string BodyMsg;
+		public string DirectionsMsg;
 		public int Difficulty;
-		public List<string> IngredientList = new List<string>();
 		public bool IsFavorite;
+		public List<string> IngredientList = new List<string>();
 
-		public Recipe(string RecipeCategory, string _recipeName, string _bodyMsg, List<string> _IngredientList, int _Difficulty, bool _isFavorite = false)
+		// These are only used to convert values in order to be accepted by SQLite syntax.
+		public string TempIngredientList;
+		public int IsFavorite_AsInt;
+
+		public Recipe(string _categoryName, string _RecipeName, string _DirectionsMsg, string _TempIngredientList, int _Difficulty, int _IsFavorite_Int)
 		{
-			categoryName = RecipeCategory;
-			RecipeName = _recipeName;
-			BodyMsg = _bodyMsg;
-			IngredientList = _IngredientList;
+			categoryName = _categoryName;
+			RecipeName = _RecipeName;
+			DirectionsMsg = _DirectionsMsg;
 			Difficulty = _Difficulty;
-			IsFavorite = _isFavorite;
+
+			// Convert values from the DB to the default Recipe Class
+			string[] ingredientArray = _TempIngredientList.Split('\n');
+            foreach (var ingredient in ingredientArray)
+            {
+                if (ingredient.Length > 0)
+                {
+					IngredientList.Add(ingredient);
+				}
+            }
+
+			if (_IsFavorite_Int == 1)
+            {
+				IsFavorite = true;
+            }
+            else if (_IsFavorite_Int == 0)
+            {
+				IsFavorite = false;
+			}
 		}
+		
+		/// <summary>
+		/// Check the bool IsFavorite then turn it into an Int value instead. This is used because SQLite doesnt support Boolean values.
+		/// </summary>
+		/// <returns>If the recipe is a Favorite return a 1, if not return 0.</returns>
+		public int IsFavoriteToInt()
+        {
+            if (IsFavorite == true)
+            {
+				return 1;
+            }
+            else
+            {
+				return 0;
+			}
+        }
+
+		/// <summary>
+		/// Convert the recipes List into a single string for the DB.
+		/// </summary>
+		/// <returns></returns>
+		public string IngredientsToString()
+        {
+			string outputstring = "";
+            foreach (var item in IngredientList)
+            {
+				outputstring += item.ToString() + "\n";
+            }
+			return outputstring;
+        }
 	}
 }

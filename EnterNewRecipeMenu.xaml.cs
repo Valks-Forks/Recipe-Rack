@@ -15,7 +15,7 @@ namespace Recipe_Rack
     {
         // Check if User is Editing or doing a new recipe
         public bool IsThisAnEdit = false;
-        public string OldRecipePath;
+        public string OldRecipeName;
 
         public EnterNewRecipeMenu()
         {
@@ -107,11 +107,10 @@ namespace Recipe_Rack
         //Check if data looks okay one last time and Finalize the Output
         private void FinalizeRecipe_Button_Click(object sender, RoutedEventArgs e)
         {
-
             CheckIfButtonCanBePressed();
 
-            // Check if user is attempting to save a file with a similiar name and prevent it
-            List<Recipe> ListofRecipes = MainWindow.UpdateObjectsFromFiles();
+            // Check if user is attempting to save a recipe with a similiar name and prevent it
+            List<Recipe> ListofRecipes = SqliteDataAccess.LoadAllRecipes();
             foreach (var item in ListofRecipes)
             {
                 if (item.RecipeName == RecipeName_TextBox.Text && IsThisAnEdit == false)
@@ -128,22 +127,23 @@ namespace Recipe_Rack
                 }
             }
 
-            // Check if button is still enabled
+            // Check if button is still enabled, If it is write the Recipe to the SQLite DB.
             if (FinalizeRecipe_Button.IsEnabled == true)
             {
                 if (IsThisAnEdit)
                 {
-                    System.IO.File.Delete(OldRecipePath);
+                    SqliteDataAccess.DeleteRecipe(OldRecipeName);
                 }
-                Recipe recipe = new Recipe(RecipeCategory_ComboBox.SelectedItem.ToString(), RecipeName_TextBox.Text,  new TextRange(Directions_RichTextBox.Document.ContentStart, Directions_RichTextBox.Document.ContentEnd).Text.ToString(), ParseListInfo(EnterNewRecipe_IngredientListView), Int16.Parse(RecipeDifficulty_ComboBox.Text.ToString()), IsFavorite_Checkbox.IsChecked == true );
+                
+                Recipe recipe = new Recipe(RecipeCategory_ComboBox.SelectedItem.ToString(), RecipeName_TextBox.Text,  new TextRange(Directions_RichTextBox.Document.ContentStart, Directions_RichTextBox.Document.ContentEnd).Text.ToString(), ConvertListToString(ParseListInfo(EnterNewRecipe_IngredientListView)), Int16.Parse(RecipeDifficulty_ComboBox.Text.ToString()), ConvertBoolToInt(IsFavorite_Checkbox.IsChecked.Value));
                 this.Close();
-                Recipe_JsonHandler.WriteToJsonFile(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Recipes\\"+ recipe.RecipeName.Trim() + ".json", recipe);
+                SqliteDataAccess.SaveRecipe(recipe);
             }
         }
 
         private void RecipeName_TextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            // Since Recipe Names are used to make file names make the sure user doesnt input invalid file format
+            // Limit the user from entering invalid characters into the Recipe Name field
             // This is a list of all illegal characters
             char[] InvalidCharacter = new char[] { '<', '>', ':', '"', '/', '\\', '|', '?', '*', '\'', '.', ',', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '_', '=', '+', '`', '~', ';', '[', ']', '{', '}' };
 
@@ -180,6 +180,37 @@ namespace Recipe_Rack
         private void Directions_RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             CheckIfButtonCanBePressed();
+        }
+
+        /// <summary>
+        /// Returns Int value in place of a bool.
+        /// </summary>
+        /// <param name="boolToConvert"></param>
+        /// <returns>Returns 1 if true or 0 if false.</returns>
+        private static int ConvertBoolToInt(bool boolToConvert)
+        {
+            if (boolToConvert)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+        /// <summary>
+        /// Returns a single String in place of a List(Strings)
+        /// </summary>
+        /// <param name="ListToConvert"></param>
+        /// <returns></returns>
+        private static string ConvertListToString(List<string> ListToConvert)
+        {
+            string stringToReturn = "";
+            foreach (var item in ListToConvert)
+            {
+                stringToReturn += item + '\n';
+            }
+            return stringToReturn;
         }
     }
 }
