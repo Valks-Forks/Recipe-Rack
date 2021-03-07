@@ -8,10 +8,3 @@ The application generates the following directory.
 
 *This Application is a simple WPF C# project. It was my first "full featured" project start to finish.
 
-(Old) Preview Screenshots
-
-![Recipe Rack Startup](https://github.com/Rowwbit/Recipe-Rack/edit/master/RR_Main.PNG)
-
-![Recipe Rack Edit Recipe Section](https://github.com/Rowwbit/Recipe-Rack/edit/master/RR_EditRecipe.PNG)
-
-![Recipe Rack Tips Menu](https://github.com/Rowwbit/Recipe-Rack/edit/master/RR_TipsMenu.PNG)
