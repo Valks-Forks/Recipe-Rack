@@ -60,18 +60,18 @@ namespace Recipe_Rack
 
         private void Save_Button_Click(object sender, RoutedEventArgs e)
         {
-            Recipe_JsonHandler.WriteToJsonFile_Tips(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Tips\\TipsDocument.json", new TextRange(Tips_Rich_TextBox.Document.ContentStart, Tips_Rich_TextBox.Document.ContentEnd).Text.ToString());
+            Recipe_JsonHandler.WriteToJsonFile_Tips(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\TipsDocument.json", new TextRange(Tips_Rich_TextBox.Document.ContentStart, Tips_Rich_TextBox.Document.ContentEnd).Text.ToString());
             HasTxtChanged = false;
         }
 
         private void Window_Initialized(object sender, EventArgs e)
         {
-            Tips_Rich_TextBox.AppendText(Recipe_JsonHandler.ReadFromJsonFile_Tips(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Tips\\TipsDocument.json"));
+            Tips_Rich_TextBox.AppendText(Recipe_JsonHandler.ReadFromJsonFile_Tips(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\TipsDocument.json"));
         }
 
         private void Save_Close_Button_Click(object sender, RoutedEventArgs e)
         {
-            Recipe_JsonHandler.WriteToJsonFile_Tips(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Tips\\TipsDocument.json", new TextRange(Tips_Rich_TextBox.Document.ContentStart, Tips_Rich_TextBox.Document.ContentEnd).Text.ToString());
+            Recipe_JsonHandler.WriteToJsonFile_Tips(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\TipsDocument.json", new TextRange(Tips_Rich_TextBox.Document.ContentStart, Tips_Rich_TextBox.Document.ContentEnd).Text.ToString());
             HasTxtChanged = false;
             this.Close();
         }
@@ -96,7 +96,7 @@ namespace Recipe_Rack
 
                 if (areYouSureDialog.DoesUserWantToSave == true)
                 {
-                    Recipe_JsonHandler.WriteToJsonFile_Tips(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\Tips\\TipsDocument.json", new TextRange(Tips_Rich_TextBox.Document.ContentStart, Tips_Rich_TextBox.Document.ContentEnd).Text.ToString());
+                    Recipe_JsonHandler.WriteToJsonFile_Tips(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Recipe Rack\\TipsDocument.json", new TextRange(Tips_Rich_TextBox.Document.ContentStart, Tips_Rich_TextBox.Document.ContentEnd).Text.ToString());
                     HasTxtChanged = false; 
                 } 
             }   
